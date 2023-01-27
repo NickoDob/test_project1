@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница сверки</title>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+<form enctype="multipart/form-data">
+    <input type="button" onclick="history.back();" value="Назад"/>
+
+    <h3>Выберите ключевые поля:</h3>
+    <ul>
+    {% for key in keylist %}
+        <li><input class='req' type="checkbox" name='{{key}}' onclick='deRequire("req")' required>{{key}}</li>
+    {% endfor %}
+    </ul>
+    <br><hr>
+
+    <h3>Выберите поля для объединения из второй таблицы к первой:</h3>
+    <ul>
+    {% for check in checklist %}
+        <li><input type="checkbox" name='{{check}}'>{{check}}</li>
+    {% endfor %}
+    </ul>
+    <br><hr>
+
+    <input type="checkbox" name="Замена">Заменить букву 'ё' на 'е' в записях<br><hr>
+
+    <input formaction="{{ url_for('coincidences') }}" formmethod="post" type="submit" value="Совпавшие записи">
+    <input formaction="{{ url_for('differences') }}" formmethod="post" type="submit" value="Уникальные записи">
+    <input formaction="{{ url_for('joined') }}" formmethod="post" type="submit" value="Объединение">
+</form>
+</body>
+</html>
