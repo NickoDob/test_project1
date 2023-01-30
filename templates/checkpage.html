@@ -12,7 +12,7 @@
     <h3>Выберите ключевые поля:</h3>
     <ul>
     {% for key in keylist %}
-        <li><input class='req' type="checkbox" name='{{key}}' onclick='deRequire("req")' required>{{key}}</li>
+        <li><label for='{{key}}'><input id="{{key}}" class='req' type="checkbox" name='{{key}}' onclick='deRequire("req")' required>{{key}}</label></li>
     {% endfor %}
     </ul>
     <br><hr>
@@ -20,7 +20,7 @@
     <h3>Выберите поля для объединения из второй таблицы к первой:</h3>
     <ul>
     {% for check in checklist %}
-        <li><input type="checkbox" name='{{check}}'>{{check}}</li>
+        <li><label for='{{check}}'><input id="{{check}}" type="checkbox" name='{{check}}'>{{check}}</label></li>
     {% endfor %}
     </ul>
     <br><hr>
