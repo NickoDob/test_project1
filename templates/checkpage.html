@@ -25,7 +25,7 @@
     </ul>
     <br><hr>
 
-    <input type="checkbox" name="Замена">Заменить букву 'ё' на 'е' в записях<br><hr>
+    <label for='Замена'><input id="Замена" type="checkbox" name="Замена">Заменить букву 'ё' на 'е' в записях</label><br><hr>
 
     <input formaction="{{ url_for('coincidences') }}" formmethod="post" type="submit" value="Совпавшие записи">
     <input formaction="{{ url_for('differences') }}" formmethod="post" type="submit" value="Уникальные записи">

@@ -1,5 +1,3 @@
-import os
-import sys
 from pathlib import Path
 
 import pandas as pd
@@ -17,11 +15,8 @@ gt, keys, checks = [], [], []
 @app.route('/', methods=['GET', 'POST'])
 def upload():
     global gt, keys, checks
-    #    Path.mkdir(Path.home() / './results/', parents=True, exist_ok=True)
-    #    Path.mkdir(Path.home() / './tables/', parents=True, exist_ok=True)
-    if os.path.exists('./results/') == False and os.path.exists('./tables/') == False:
-        os.mkdir('./results/')
-        os.mkdir('./tables/')
+    Path("./results/").mkdir(parents=True, exist_ok=True)
+    Path("./tables/").mkdir(parents=True, exist_ok=True)
     if request.method == 'POST':
         gt = global_table()
         val = validator(gt)
