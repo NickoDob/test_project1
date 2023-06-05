@@ -3,11 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Сверка таблиц</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
 </head>
 <body>
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/table.css') }}">
-<input type="button" onclick="history.back();" value="Назад"/>
-<input type="button" onclick="window.history.go(-2);" value="На главную"/>
+
+<div id="content">
+    <form enctype="multipart/form-data">
+        <input type="button" id="back" onclick="history.back();" value="Назад"/>
+        <input type="button" id="back2" onclick="window.history.go(-2);" value="На главную"/>
+        <input formaction="{{ url_for('resultTable') }}" id="resultTable" title="Сохранить таблицу" formmethod="post"
+               type="submit" value="Сохранить">
+    </form>
+</div>
+
+<button onclick="topFunction()" id="myBtn" title="Перейти к началу">Вверх</button>
+
 <div align="center">
             <table>
                 <h1>
@@ -17,5 +28,25 @@
                 </h1>
             </table>
         </div>
+<script>
+
+var mybutton = document.getElementById("myBtn");
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+
 </body>
 </html>

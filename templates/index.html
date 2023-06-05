@@ -3,15 +3,17 @@
 
 <head>
     <title>Загрузка/выгрузка таблиц</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
 </head>
 
 <body>
-    <h1>Работа с таблицами</h1>
+<div id="loading"></div>
+    <div id="content">
 
     <form enctype="multipart/form-data">
 
         <h4>Таблица №1:</h4>
-
         <input id="t1" type="file" name="file1" required="required" title="Необходимо выбрать файл"
                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
 
@@ -19,13 +21,25 @@
         <input id='t2' type="file" name="file2" required="required" title="Необходимо выбрать файл"
                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"><br>
         <br>
-        <input formmethod="post" type="submit" value="Сверить">
+        <input id="checked" formmethod="post" type="submit" value="Сверить" onclick="loading();" >
+
         <script type="text/javascript">
         document.getElementById('upload').onclick = function upload() {
         let token = localStorage.getItem('token')
         }
         </script>
     </form>
+    </div>
+
+<script>
+        function loading() {
+            var f1 = document.getElementById('f1').value;
+                if (f1) {
+                    document.getElementById("loading").style.display = "block";
+                    document.getElementById("content").style.display = "none";
+                }
+        }
+</script>
 </body>
 
 </html>
