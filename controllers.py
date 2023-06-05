@@ -1,11 +1,11 @@
-import os
-
 import pandas as pd
 import pathlib
 
 from flask import request
 from dbfread import DBF
 from pymsgbox import alert
+
+downloads_path = str(pathlib.Path.home() / "Downloads")
 
 
 def check_page_creator(gt):
@@ -54,22 +54,23 @@ def check_replacer(df):
 
 
 def global_table():
+    global downloads_path
     data = []
     files = [request.files['file1'], request.files['file2']]
     for file in files:
         if pathlib.Path(file.filename).suffix == '.xlsx':
-            file.save('./tables/' + file.filename)
-            df = pd.read_excel('./tables/' + file.filename, parse_dates=False, index_col=None)
+            file.save(downloads_path + '/tables/' + file.filename)
+            df = pd.read_excel(downloads_path + '/tables/' + file.filename, parse_dates=False, index_col=None)
             df.columns = [column.strip() for column in df]
             data.append(df)
         elif pathlib.Path(file.filename).suffix == '.csv':
-            file.save('./tables/' + file.filename)
-            df = pd.read_csv('./tables/' + file.filename, sep=";", encoding="cp1251", index_col=None)
+            file.save(downloads_path + '/tables/' + file.filename)
+            df = pd.read_csv(downloads_path + '/tables/' + file.filename, sep=";", encoding="cp1251", index_col=None)
             df.columns = [column.strip() for column in df]
             data.append(df)
         elif pathlib.Path(file.filename).suffix == '.dbf':
-            file.save('./tables/' + file.filename)
-            df = pd.DataFrame(iter(DBF('./tables/' + file.filename)))
+            file.save(downloads_path + '/tables/' + file.filename)
+            df = pd.DataFrame(iter(DBF(downloads_path + '/tables/' + file.filename)))
             df.columns = [column.strip() for column in df]
             data.append(df)
         else:
