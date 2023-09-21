@@ -20,21 +20,13 @@
         <li><label for='{{key}}'><input id="{{key}}" class='req' type="checkbox" name='{{key}}' onclick='deRequire("req")' required>{{key}}</label></li>
     {% endfor %}
     </ul>
-    <br><hr>
-
-    <h4>Выберите поля для объединения из второй таблицы к первой:</h4>
-    <ul>
-    {% for check in checklist %}
-        <li><label for='{{check}}'><input id="{{check}}" type="checkbox" name='{{check}}'>{{check}}</label></li>
-    {% endfor %}
-    </ul>
+    <label for='key_all'><input id='key_all' type="checkbox" onClick='toggle(this, "req")'/>Отметить всё</label><br>
     <br><hr>
 
     <label for='Замена'><input id="Замена" type="checkbox" name="Замена">Заменить букву 'ё' на 'е' в записях</label><br><hr>
 
-    <input id='coincidences' formaction="{{ url_for('coincidences') }}" formmethod="post" type="submit" value="Совпавшие записи" onclick="loading();">
-    <input id='differences' formaction="{{ url_for('differences') }}" formmethod="post" type="submit" value="Уникальные записи" onclick="loading();">
-    <input id='joined' formaction="{{ url_for('joined') }}" formmethod="post" type="submit" value="Объединение" onclick="loading();">
+    <input id='coincidences' formaction="{{ url_for('coincidences') }}" formmethod="post" type="submit" value="Общие записи" onclick="loading();">
+    <input id='differences' formaction="{{ url_for('differences') }}" formmethod="post" type="submit" value="Уникальные записи из обеих таблиц" onclick="loading();">
 </form>
 </div>
 
