@@ -1,23 +1,21 @@
-import pandas as pd
 import pathlib
 
-from flask import request
+import pandas as pd
 from dbfread import DBF
+from flask import request
 from pymsgbox import alert
 
 downloads_path = str(pathlib.Path.home() / "Downloads")
 
 
 def check_page_creator(gt):
-    keylist, checklist = [], set()
+    keylist = []
     for column1 in gt[0]:
         for column2 in gt[1]:
             if column2 == column1:
                 keylist.append(column2)
-            checklist.add(column2)
     keys = keylist
-    checks = [elem for elem in checklist if elem not in keylist]
-    return [gt, keys, checks]
+    return [gt, keys]
 
 
 def validator(gt):
@@ -25,15 +23,6 @@ def validator(gt):
         return alert("Выбран файл с неподходящим расширением", "Ошибка", button='OK')
     else:
         return check_page_creator(gt)
-
-
-def checkboxes(taglist):
-    checklist = []
-    for checkbox in taglist:
-        value = request.form.get(checkbox)
-        if value:
-            checklist.append(checkbox)
-    return checklist
 
 
 def keyboxes(taglist):
@@ -58,7 +47,7 @@ def global_table():
     data = []
     files = [request.files['file1'], request.files['file2']]
     for file in files:
-        if pathlib.Path(file.filename).suffix == '.xlsx':
+        if pathlib.Path(file.filename).suffix == '.xlsx' or pathlib.Path(file.filename).suffix == '.xls':
             file.save(downloads_path + '/tables/' + file.filename)
             df = pd.read_excel(downloads_path + '/tables/' + file.filename, parse_dates=False, index_col=None)
             df.columns = [column.strip() for column in df]
@@ -68,7 +57,7 @@ def global_table():
             df = pd.read_csv(downloads_path + '/tables/' + file.filename, sep=";", encoding="cp1251", index_col=None)
             df.columns = [column.strip() for column in df]
             data.append(df)
-        elif pathlib.Path(file.filename).suffix == '.dbf':
+        elif pathlib.Path(file.filename).suffix == '.DBF':
             file.save(downloads_path + '/tables/' + file.filename)
             df = pd.DataFrame(iter(DBF(downloads_path + '/tables/' + file.filename)))
             df.columns = [column.strip() for column in df]
