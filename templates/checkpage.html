@@ -12,9 +12,9 @@
 
 <div id="content">
 <form enctype="multipart/form-data">
-    <input type="button" id="back" onclick="history.back();" value="Назад"/>
+    <input type="button" id="back" onclick="history.back();" value="Назад" title="Вернуться на предыдущую страницу"/>
 
-    <h4>Выберите ключевые поля:</h4>
+    <h4>Выберите ключевые поля, по которым будет проходить сверка (эти же поля войдут в результирующую таблицу):</h4>
     <ul>
     {% for key in keylist %}
         <li><label for='{{key}}'><input id="{{key}}" class='req' type="checkbox" name='{{key}}' onclick='deRequire("req")' required>{{key}}</label></li>
@@ -23,10 +23,20 @@
     <label for='key_all'><input id='key_all' type="checkbox" onClick='toggle(this, "req")'/>Отметить всё</label><br>
     <br><hr>
 
+    <h4>Выберите поля, которые войдут в результирующую таблицу:</h4>
+    <ul>
+    {% for check in checklist %}
+        <li><label for='{{check}}'><input id="{{check}}" class='chk' type="checkbox" name='{{check}}'>{{check}}</label></li>
+    {% endfor %}
+    </ul>
+    <label for='check_all'><input id='check_all' type="checkbox" onClick='toggle(this, "chk")'/>Отметить всё</label><br>
+    <br><hr>
+
     <label for='Замена'><input id="Замена" type="checkbox" name="Замена">Заменить букву 'ё' на 'е' в записях</label><br><hr>
 
     <input id='coincidences' formaction="{{ url_for('coincidences') }}" formmethod="post" type="submit" value="Общие записи" onclick="loading();">
     <input id='differences' formaction="{{ url_for('differences') }}" formmethod="post" type="submit" value="Уникальные записи из обеих таблиц" onclick="loading();">
+    <input id='joined' formaction="{{ url_for('joined') }}" formmethod="post" type="submit" value="Объединенные записи" onclick="loading();">
 </form>
 </div>
 

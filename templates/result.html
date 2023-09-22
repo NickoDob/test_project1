@@ -10,8 +10,8 @@
 
 <div id="content">
     <form enctype="multipart/form-data">
-        <input type="button" id="back" onclick="history.back();" value="Назад"/>
-        <input type="button" id="back2" onclick="window.history.go(-2);" value="На главную"/>
+        <input type="button" id="back" onclick="history.back();" value="Назад"  title="Вернуться на предыдущую страницу" />
+        <input type="button" id="back2" onclick="window.history.go(-2);" value="На главную"   title="Вернуться на главную страницу" />
         <input formaction="{{ url_for('resultTable') }}" id="resultTable" title="Сохранить таблицу" formmethod="post"
                type="submit" value="Сохранить">
     </form>
