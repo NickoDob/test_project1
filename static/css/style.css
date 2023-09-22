@@ -150,21 +150,6 @@ label {
         border-radius: 4px;
     }
 
-    #fulled {
-        bottom: 20px;
-        right: 30px;
-        z-index: 99;
-        font-size: 18px;
-        border: none;
-        outline: none;
-        background-color: #3498DB;
-        color: white;
-        cursor: pointer;
-        padding: 10px;
-        border-radius: 4px;
-    }
-
-
 
     #myBtn:hover {
         background-color: #555;
