@@ -10,18 +10,16 @@ downloads_path = str(pathlib.Path.home() / "Downloads")
 
 
 def check_page_creator(gt):
-    keylist, checklist = [], set()
+    keylist = []
     for column1 in gt[0]:
         for column2 in gt[1]:
             if column2 == column1:
                 keylist.append(column2)
-            checklist.add(column2)
     if len(keylist) == 0:
         return alert("Отсутствуют общие заголовки столбцов", "Ошибка", button='OK')
     else:
         keys = keylist
-        checks = [elem for elem in checklist if elem not in keylist]
-        return [gt, keys, checks]
+        return [gt, keys]
 
 
 def validator(gt):
@@ -29,15 +27,6 @@ def validator(gt):
         return alert("Выбран файл с неподходящим расширением", "Ошибка", button='OK')
     else:
         return check_page_creator(gt)
-
-
-def checkboxes(taglist):
-    checklist = []
-    for checkbox in taglist:
-        value = request.form.get(checkbox)
-        if value:
-            checklist.append(checkbox)
-    return checklist
 
 
 def keyboxes(taglist):
